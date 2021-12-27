@@ -1,0 +1,20 @@
+@import './../../assets/lib/vars';
+@import './../../assets/lib/mixins';
+
+.section_footer {
+    @include flex-start-center;
+    background-color: $bg_section_footer;
+    padding: 1rem;
+}
+
+.icon {
+    color: $fore_color_grey;
+}
+
+.icon:hover {
+    color: $fore_color_secondary;
+}
+
+.text {
+    color: $fore_color_grey;
+}

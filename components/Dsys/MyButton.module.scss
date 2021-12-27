@@ -1,0 +1,85 @@
+@import './../../assets/lib/vars';
+@import './../../assets/lib/mixins';
+
+.button-text {
+    border-radius: 5px;
+}
+
+.button-icon {
+    border-radius: 50%;
+}
+
+.button-default {
+    @include flex-center-center;
+    
+    background-color: $bg_ctas;
+    color: $fore_color_light_grey;
+    
+    border: 1.5px solid $bg_ctas;
+
+    box-shadow: 0 0 0 0px $fore_color_light_grey;
+    transition: box-shadow 350ms ease;
+
+    margin-right: .5rem;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &:hover {
+        outline: 0;
+        box-shadow: 0 0 0 2px rgba(172, 175, 194, 0.4);
+        transition: box-shadow 350ms ease;
+    }
+}
+
+.button-primary {
+    @include flex-center-center;
+    
+    background-color: $bg_blue;
+    color: $fore_color_secondary;
+    
+    border: 1.5px solid $bg_blue;
+
+    box-shadow: 0 0 0 0px rgba(0, 195, 255, 0.4);
+    transition: box-shadow 350ms ease;
+
+    margin-right: .5rem;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &:hover {
+        outline: 0;
+        box-shadow: 0 0 0 2px rgba(0, 195, 255, 0.4);
+        transition: box-shadow 350ms ease;
+    }
+}
+
+.button-secondary {
+    @include flex-center-center;
+    
+    background-color: transparent;
+    color: $fore_color_light_grey;
+    
+    border: 1.5px dashed $fore_color_light_grey;
+
+    box-shadow: 0 0 0 0px $fore_color_light_grey;
+    transition: box-shadow 350ms ease;
+
+    margin-right: .5rem;
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &:hover {
+        outline: 0;
+        color: white;
+        background-color: $fore_color_light_grey ;
+        border: 1.5px solid rgba(172, 175, 194, 0.4);
+        box-shadow: 0 0 0 2px rgba(172, 175, 194, 0.4);
+        transition: box-shadow 350ms ease;
+    }
+}

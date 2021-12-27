@@ -1,0 +1,8 @@
+@import './../../assets/lib/vars';
+@import './../../assets/lib/mixins';
+
+.section_content {
+    @include flex-column-start-center; 
+    background-color: $bg_section;
+    padding: 0 1rem;   
+}

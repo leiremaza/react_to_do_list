@@ -1,0 +1,44 @@
+$font_family_base: 'Roboto', 'Source Sans Pro', 'Helvetica', Arial, sans_serif;
+$font_size_base: 16px;
+$font_weight_base: normal;
+$line_height_base: 1.4;
+$body_color: #333;
+$body_bg: #fff;
+
+$headings_margin_bottom: 1em;
+$paragraph_margin_bottom: 1em;
+
+$dt_font_weight: bold;
+
+$link_color: #345c8d;
+$link_decoration: none;
+$link_hover_color: darken($link_color, 10%);
+$link_hover_decoration: none;
+$table_cell_padding: .5em;
+
+$text_muted: lighten($body_color, 15%);
+
+$base: .5rem;
+
+
+/********************************************/
+/**************  MY VARIABLES  **************/
+/********************************************/
+
+$fore_color_primary: #000000;
+$fore_color_dark_grey: #7A7A7A;
+$fore_color_grey: #757C8F;
+$fore_color_light_grey: #ACAFC2;
+$fore_color_secondary: #FFFFFF;
+
+$bg_header: #F8F9FE;
+$bg_main: #FFFFFF;
+$bg_section: #F2F5FE;
+$bg_article: #FFFFFF;
+$bg_section_footer: #E7EAF9;
+$bg_ctas: #E7EBF7;
+
+$bg_red: #FF2121;
+$bg_orange: #FAAB35;
+$bg_green: #57C238;
+$bg_blue: #2191FF;

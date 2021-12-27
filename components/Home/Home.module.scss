@@ -1,0 +1,42 @@
+@import './../../assets/lib/vars';
+@import './../../assets/lib/mixins';
+
+.home {
+    @include flex-column-start-center;
+    background: $bg_main;
+}
+
+.sections {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: .3125rem;
+    width: calc(100% - .3125rem - .3125rem);
+}
+
+.section {
+    background: $bg_article;
+    margin-right: .3125rem;
+    width: 25%;
+    
+    &:last-child {
+        margin-right: 0;
+    }   
+}
+
+.section_content {
+    @include flex-column-start-center; 
+    background-color: $bg_section;
+    padding: 0 1rem;   
+}
+
+.section {
+    background: $bg_article;
+    margin-right: .3125rem;
+    width: 25%;
+    
+    &:last-child {
+        margin-right: 0;
+    }   
+}

@@ -1,0 +1,146 @@
+@import './../../assets/lib/vars';
+@import './../../assets/lib/mixins';
+
+.link {
+    width: 100%;
+}
+
+.card {
+    @include flex-column-start-center;    
+    background-color: $bg_article;
+    padding: 1rem;
+    margin-bottom: .5rem;
+
+    width: calc(100% - 2*1rem);
+
+    &:hover {
+        background-color: $bg_ctas;
+    }
+} 
+
+.card_header {
+    @include flex-spacebetween-center;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.creation_date {
+    @include flex-start-center;
+}
+
+.date {
+    color: $fore_color_light_grey;
+}
+
+.time_icon {
+    @include flex-center-center;
+    margin-right: .25rem;
+}
+
+.time_icon .icon{
+    height: 1.25rem;
+    color: $fore_color_light_grey;
+}
+
+.remove_button {
+    @include flex-center-center;
+}
+
+.remove_button .icon {
+    height: 1.25rem;
+    width: 1.25rem;
+}
+
+.card_title {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.categories {
+    @include flex-start-center;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.category {
+    background-color: $fore_color_light_grey;
+    height: .25rem;
+    width: 1.25rem;
+    border-radius: .25rem;
+    margin-right: .5rem;
+
+    &:last-child {
+        margin-right: 0;
+    }
+}
+
+.category.red {
+    background-color: $bg_red;
+}
+
+.category.orange {
+    background-color: $bg_orange;
+}
+
+.category.green {
+    background-color: $bg_green;
+}
+
+.category.blue {
+    background-color: $bg_blue;
+}
+
+.picture {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.picture img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: .5rem;
+}
+
+.card_footer {
+    @include flex-spacebetween-center;
+    width: 100%;
+}
+
+.notifications {
+    @include flex-start-center;
+}
+
+.attatched_files {
+    @include flex-start-center;
+    color: $fore_color_light_grey;
+    margin-right: 1.25rem;
+}
+
+.comments {
+    @include flex-start-center;
+    color: $fore_color_light_grey;
+}
+
+.text {
+    padding-left: 3px;
+}
+
+.attatched_files .icon {
+    height: 1.25rem;
+    transform: rotate(225deg);
+}
+
+.comments .icon {
+    height: 1.25rem;
+}
+
+.users {
+    @include flex-start-center;
+}
+
+.user {
+    @include margin-between-elements(.5rem);
+    border-radius: 50%;
+    height: 1.5rem;
+}

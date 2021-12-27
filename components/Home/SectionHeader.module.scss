@@ -1,0 +1,59 @@
+@import './../../assets/lib/vars';
+@import './../../assets/lib/mixins';
+
+.section_header {
+    @include flex-spacebetween-center;
+    padding: 1rem;
+    background-color: $bg_section;
+}
+
+.section_title {
+    @include flex-column-start-center;
+    margin-right: 6.75rem;
+}
+
+.text {
+    color: $fore_color_primary;
+    margin-bottom: .3125rem;
+}
+
+
+.progress_bar {
+    height: 4px;
+    margin: 0;
+    padding: 0;
+}
+
+.progress_bar::-webkit-progress-bar {
+    background: $fore_color_light_grey;
+    border: none;
+    border-radius: .25rem;
+}
+
+.progress_bar.blue::-webkit-progress-value {
+    background-color: $bg_blue;
+    border-radius: .25rem;
+}
+
+.progress_bar.green::-webkit-progress-value {
+    background-color: $bg_green;
+    border-radius: .25rem;
+}
+
+.progress_bar.orange::-webkit-progress-value {
+    background-color: $bg_orange;
+    border-radius: .25rem;
+}
+
+.progress_bar.red::-webkit-progress-value {
+    background-color: $bg_red;
+    border-radius: .25rem;
+}
+
+.section_ctas {
+    @include flex-end-center;
+}
+
+.my_button {
+    height: 1.32625rem;
+}

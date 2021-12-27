@@ -1,0 +1,70 @@
+@import './../../assets/lib/vars';
+@import './../../assets/lib/mixins';
+
+.searchbox {
+    width: calc(100% - 2*1.625rem);
+    padding: .75rem 1.625rem;
+    @include flex-spacebetween-center;
+}
+
+.form {
+    @include flex-start-center;
+}
+
+.searchbox_icon {
+    margin-right: .5rem;
+    height: 1.25rem;
+}
+
+.icon {
+    color: $fore_color_light_grey;
+    height: 1.25rem;
+}
+
+.input_control {
+    color: $fore_color_light_grey;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.input_control::placeholder {
+    color: $fore_color_light_grey;
+}
+
+.ctas {
+    @include flex-start-center;
+}
+
+.text {
+    color: $fore_color_dark_grey;
+    padding: .25rem .5rem;
+}
+
+.text:hover {
+    color: $fore_color_secondary;
+}
+
+.sort_by {
+    @include flex-start-center;
+}
+
+.name {
+    color: $fore_color_dark_grey;
+    padding: .5rem;
+}
+
+.select {
+    border: none;
+    color: $fore_color_light_grey;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.option {
+    color: $fore_color_light_grey;
+    text-align: center;
+}

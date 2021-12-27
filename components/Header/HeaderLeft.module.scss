@@ -1,0 +1,15 @@
+@import './../../assets/lib/vars';
+@import './../../assets/lib/mixins';
+
+.header_left {
+    @include flex-start-center;
+    text-decoration: none;
+}
+
+.logo {
+    color: $fore_color_primary;
+}
+.name {
+    margin-left: .5rem;
+    color: $fore_color_primary;
+}
