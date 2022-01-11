@@ -4,7 +4,8 @@ import styles from './SearchBox.module.scss'
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import MyButton from '../Dsys/MyButton';
 
-const SearchBox = () => {
+const SearchBox = (props) => {
+
     return (
         <nav className={styles.searchbox}>
             <form className={styles.form}>
@@ -17,7 +18,7 @@ const SearchBox = () => {
             </form>
             <div className={styles.ctas}>
                 <MyButton theme="secondary" content="text" /*onClick={addNewGroup}*/>
-                    <h4 className={styles.text}>New</h4>
+                    <h4 className={styles.text} onClick={props.addNewSection}>New</h4>
                 </MyButton>
                 <MyButton theme="secondary" content="text">
                     <h4 className={styles.text}>Filter</h4>

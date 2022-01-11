@@ -18,9 +18,7 @@ import { Field, Form, Formik } from 'formik'
 import { TextareaAutosize } from '@material-ui/core'
 
 const FormCard = (props) => {
-
-    console.log(task);
-
+    console.log(props.task);
     const task = props.task;
 
     const categories = task.categories.map(categoryId => categories_.find(category => category.id === categoryId));
@@ -80,7 +78,8 @@ const FormCard = (props) => {
                 <div className={styles.card_content}>
                     
                         <div className={styles.card_title}>
-                            <Field id="title" name="title" type="text" className={styles.title} />
+                            <Field id="title" name="title" type="text" className={styles.title}
+                            placeholder={task.title} disable/>
                         </div>
                         <div className={styles.creation_date}>
                             <div className={styles.clock}>

@@ -10,12 +10,12 @@ import SectionFooter from "./SectionFooter"
 
 const Home = () => {
 
-    const { state, onDragEnd, sections } = useContext(TasksContext);
+    const { state, onDragEnd, sections, addNewSection } = useContext(TasksContext);
 
     return (
 
         <div className={styles.home}>
-            <SearchBox />
+            <SearchBox addNewSection={addNewSection}/>
             <div className={styles.sections}>
                 <DragDropContext onDragEnd={onDragEnd}>
                     {
