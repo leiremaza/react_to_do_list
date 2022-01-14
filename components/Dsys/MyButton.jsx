@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './MyButton.module.scss'
 
-const MyButton = (props) => {
+const MyButton = React.forwardRef((props, onClick, href, ref) => {
 
    const buttonClass = [
         styles["button-" + props.content], 
@@ -9,10 +9,11 @@ const MyButton = (props) => {
     ]
 
     return (
-        <button className={buttonClass.join(" ")}>
+        <button href={href} onClick={onClick} ref={ref} className={buttonClass.join(" ")}>
             {props.children}
         </button>
     )
-}
+})
+
 
 export default MyButton

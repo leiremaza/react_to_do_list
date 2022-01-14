@@ -1,0 +1,41 @@
+@import './../../assets/lib/vars';
+@import './../../assets/lib/mixins';
+.pop_add_users{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    background-color: #E7EBF7;
+    padding: .75rem;
+    border-radius: .25rem;
+    margin-top: .5rem;
+    
+    .add_users_search{
+        
+        input{
+            border-radius: .25rem;
+
+            padding: .5rem;
+        }
+    }
+    .add_users{
+        display: flex;
+        flex-direction: column;
+        margin-top: .25rem;
+        .user{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: .25rem;
+            border-radius: .25rem;
+
+            .user_pic{
+                padding: .25rem;
+                height: 24px;
+            }
+        }
+    }
+    .user:hover{
+        background-color: white;
+    }
+}

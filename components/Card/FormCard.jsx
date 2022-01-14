@@ -2,83 +2,68 @@ import React from 'react'
 import styles from "./FormCard.module.scss"
 import Link from 'next/link'
 import dayjs from 'dayjs'
-
 import MyButton from '../Dsys/MyButton'
 import { categories as categories_ } from './../../models/categories'
 import { users as users_ } from './../../models/users'
 import { attached as attached_ } from './../../models/attached'
 import { comments as comments_ } from './../../models/comments'
-
 import CloseIcon from '@material-ui/icons/Close';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import AccessTimeOutlinedIcon from '@material-ui/icons/AccessTimeOutlined';
 import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
-import { Field, Form, Formik } from 'formik'
 import { TextareaAutosize } from '@material-ui/core'
-
+import FormCardPopAddUsers from './FormCardPopAddUsers'
+import { useState } from 'react'
+import FormCardPopAddCategories from './FormCardPopAddCategories'
 const FormCard = (props) => {
-    console.log(props.task);
+    
     const task = props.task;
-
     const categories = task.categories.map(categoryId => categories_.find(category => category.id === categoryId));
     const users = task.users.map(userId => users_.find(user => user.id === userId));
     const attached = task.attached.map(attachedId => attached_.find(a => a.id === attachedId));
     const comments = task.comments.map(commentId => comments_.find(comment => comment.id === commentId));
-
     const categoriesClass = styles.category + " ";
-
     const date = dayjs(task.creationDate).locale('es').format('MMM DD YYYY');
+    
+    const [popOpened, setPopOpened] = useState(false)
+    const [popOpenedCategories, setPopOpenedCategories] = useState(false)
+    const menuClasses = [
+        "menu",
+        popOpened ? "opened" : null,
+    ].join("")
+    const menuClasses2 = [
+        "menu",
+        popOpenedCategories ? "openedCategories" : null
+    ].join("")
+      const togglePop = () => {
+        setPopOpened(!popOpened)
+      }
+      const togglePopCategories = () => {
+          setPopOpenedCategories(!popOpenedCategories)
+      }
 
-    const addMessage = () => {
-
-        ev.preventDefault();
-
-        /*if (ev.target.newMsg.value != "")
-        {
-            const newComments = [...comments_];
-
-            newComments.push({
-                    id: newComments.length,
-                    text: ev.target.newMsg.value,
-                    user: 3,
-                }
-            );
-
-            setMessages(newMessages);
-
-            ev.target.newMsg.value = "";
-        }*/
-    }
-
-    const setData = (data) => {
-
-        task.push({
-            index: todos.length,
-            data,
-            creationDate: new Date(),
-        })
-
-        writeFileSync(path.resolve("tasks.js"), JSON.stringify(todos, null, 2), { flag: "w" })
-    }
+      const MyButton = React.forwardRef(({ onClick, href }, ref) => {
+        return (
+          <a href={href} onClick={onClick} ref={ref}>
+            Click Me
+          </a>
+        )
+      })
 
     return (
-        <Formik
-            initialValues={{title: "", description: task.description}}
-            onSubmit={(data) => {setData(data)}}
-        >
-            <Form className={styles.card}>
+        <div className={styles.bg_card}>
+            <div className={styles.card}>
                 <div className={styles.card_header}>
-                    <Link href="/">
+                    <Link href="/" passHref>
                         <MyButton theme="default" content="icon">
                             <CloseIcon fontSize="small" />
                         </MyButton>
                     </Link>
                 </div>
                 <div className={styles.card_content}>
-                    
                         <div className={styles.card_title}>
-                            <Field id="title" name="title" type="text" className={styles.title}
+                            <input id="title" name="title" type="text" className={styles.title}
                             placeholder={task.title} disable/>
                         </div>
                         <div className={styles.creation_date}>
@@ -96,9 +81,14 @@ const FormCard = (props) => {
                                     </div>
                                 ))
                             }
-                            <MyButton theme="default" content="icon">
-                                <AddRoundedIcon fontSize="small" />
-                            </MyButton>
+                            <div className={styles.pop_add}>
+                                <MyButton theme="default" content="icon" onClick={togglePop}>
+                                    <AddRoundedIcon fontSize="small" />
+                                </MyButton>
+                                <div className={styles[menuClasses]}>
+                                    <FormCardPopAddUsers />
+                                </div>
+                            </div>
                         </div>
                         <div className={styles.categories}>
                             {
@@ -106,9 +96,14 @@ const FormCard = (props) => {
                                     <div key={i_} className={categoriesClass.concat(styles[category.color])}></div>
                                 ))
                             }
-                            <MyButton theme="default" content="icon">
-                                <AddRoundedIcon fontSize="small" />
-                            </MyButton>
+                            <div className={styles.pop_add}>
+                                <MyButton theme="default" content="icon" onClick={togglePopCategories}>
+                                    <AddRoundedIcon fontSize="small" />
+                                </MyButton>
+                                <div className={styles[menuClasses2]}>
+                                    <FormCardPopAddCategories />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className={styles.description}>
@@ -157,7 +152,7 @@ const FormCard = (props) => {
                                     </div>
                                 ))
                             }
-                            <form className={styles.form} onSubmit={addMessage}>
+                            <form className={styles.form}>
                                 <div className={styles.user}>
                                     <img src={"../" + users_[3].pic} alt={users_[3].name} />
                                 </div>
@@ -169,16 +164,15 @@ const FormCard = (props) => {
                     </div>
                 </div>
                 <div className={styles.card_footer}>
-                    <MyButton type="submit" content="text" theme="primary">
+                    <MyButton type="button" content="text" theme="primary">
                         <h5 className={styles.add}>Add</h5>
                     </MyButton>
                     <MyButton type="reset" content="text" theme="secondary" >
                         <h5 className={styles.delete}>Delete</h5>
                     </MyButton>
                 </div>
-            </Form>
-        </Formik>
+            </div>
+        </div>
     )
 }
-
 export default FormCard
