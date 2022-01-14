@@ -19,9 +19,8 @@ import { TextareaAutosize } from '@material-ui/core'
 
 const FormCard = (props) => {
 
-    console.log(task);
-
     const task = props.task;
+    console.log(task);
 
     const categories = task.categories.map(categoryId => categories_.find(category => category.id === categoryId));
     const users = task.users.map(userId => users_.find(user => user.id === userId));
@@ -32,42 +31,10 @@ const FormCard = (props) => {
 
     const date = dayjs(task.creationDate).locale('es').format('MMM DD YYYY');
 
-    const addMessage = () => {
-
-        ev.preventDefault();
-
-        /*if (ev.target.newMsg.value != "")
-        {
-            const newComments = [...comments_];
-
-            newComments.push({
-                    id: newComments.length,
-                    text: ev.target.newMsg.value,
-                    user: 3,
-                }
-            );
-
-            setMessages(newMessages);
-
-            ev.target.newMsg.value = "";
-        }*/
-    }
-
-    const setData = (data) => {
-
-        task.push({
-            index: todos.length,
-            data,
-            creationDate: new Date(),
-        })
-
-        writeFileSync(path.resolve("tasks.js"), JSON.stringify(todos, null, 2), { flag: "w" })
-    }
-
     return (
         <Formik
-            initialValues={{title: "", description: task.description}}
-            onSubmit={(data) => {setData(data)}}
+            initialValues={{ title: "", description: task.description }}
+            onSubmit={(data) => { setData(data) }}
         >
             <Form className={styles.card}>
                 <div className={styles.card_header}>
@@ -78,16 +45,16 @@ const FormCard = (props) => {
                     </Link>
                 </div>
                 <div className={styles.card_content}>
-                    
-                        <div className={styles.card_title}>
-                            <Field id="title" name="title" type="text" className={styles.title} />
+
+                    <div className={styles.card_title}>
+                        <Field id="title" name="title" type="text" className={styles.title} />
+                    </div>
+                    <div className={styles.creation_date}>
+                        <div className={styles.clock}>
+                            <AccessTimeOutlinedIcon className={styles.icon} />
                         </div>
-                        <div className={styles.creation_date}>
-                            <div className={styles.clock}>
-                                <AccessTimeOutlinedIcon className={styles.icon} />
-                            </div>
-                            <h4 className={styles.date}>{date}</h4>
-                        </div>
+                        <h4 className={styles.date}>{date}</h4>
+                    </div>
                     <div className={styles.users_and_categories}>
                         <div className={styles.users}>
                             {
@@ -114,7 +81,7 @@ const FormCard = (props) => {
                     </div>
                     <div className={styles.description}>
                         <h4 className={styles.title}>Description:</h4>
-                        <TextareaAutosize id="description" name="description" minRows="3" maxRows="5" className={styles.text} placeholder='Add a comment...'/>
+                        <TextareaAutosize id="description" name="description" minRows="3" maxRows="5" className={styles.text} placeholder='Add a comment...' />
                     </div>
                     {
                         task.pic ?
@@ -158,7 +125,7 @@ const FormCard = (props) => {
                                     </div>
                                 ))
                             }
-                            <form className={styles.form} onSubmit={addMessage}>
+                            <form className={styles.form}>
                                 <div className={styles.user}>
                                     <img src={"../" + users_[3].pic} alt={users_[3].name} />
                                 </div>

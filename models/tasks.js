@@ -5,10 +5,11 @@ export const tasks = [
         description: "",
         creationDate: '2021-11-16',
         users: [2],
-        categories: [2, 3],        
+        categories: [2, 3],
         attached: [0, 1],
         comments: [],
-        pic: ""
+        pic: "",
+        section: 0
     },
     {
         id: 1,
@@ -16,10 +17,11 @@ export const tasks = [
         description: "",
         creationDate: '2021-11-17',
         users: [5, 6],
-        categories: [0, 3, 4],        
+        categories: [0, 3, 4],
         attached: [2, 3, 4],
         comments: [0, 1, 2, 3],
-        pic: "/img/6YvCw0v7LXM.jpg"
+        pic: "/img/6YvCw0v7LXM.jpg",
+        section: 0
     },
     {
         id: 2,
@@ -27,10 +29,11 @@ export const tasks = [
         description: "",
         creationDate: '2021-12-01',
         users: [3, 0, 2],
-        categories: [0, 2, 3],        
+        categories: [0, 2, 3],
         attached: [],
         comments: [],
-        pic: ""
+        pic: "",
+        section: 0
     },
     {
         id: 3,
@@ -38,10 +41,11 @@ export const tasks = [
         description: "",
         creationDate: '2021-12-01',
         users: [0, 2],
-        categories: [0],        
+        categories: [0],
         attached: [],
         comments: [],
-        pic: ""
+        pic: "",
+        section: 1
     },
     {
         id: 4,
@@ -49,10 +53,11 @@ export const tasks = [
         description: "",
         creationDate: '2021-12-25',
         users: [6, 2],
-        categories: [0, 2, 3, 4],        
+        categories: [0, 2, 3, 4],
         attached: [],
         comments: [],
-        pic: "/img//NqU6zbLxIk0.jpg"
+        pic: "/img//NqU6zbLxIk0.jpg",
+        section: 1
     },
     {
         id: 5,
@@ -60,10 +65,11 @@ export const tasks = [
         description: "",
         creationDate: '2022-01-06',
         users: [2],
-        categories: [1, 2, 3, 4],        
+        categories: [1, 2, 3, 4],
         attached: [],
         comments: [],
-        pic: "/img//TeC5pm55CkE.jpg"
+        pic: "/img//TeC5pm55CkE.jpg",
+        section: 2
     },
     {
         id: 6,
@@ -71,10 +77,11 @@ export const tasks = [
         description: "",
         creationDate: '2022-01-22',
         users: [0, 4],
-        categories: [0, 2, 4],        
+        categories: [0, 2, 4],
         attached: [],
         comments: [],
-        pic: ""
+        pic: "",
+        section: 3
     },
     {
         id: 7,
@@ -82,9 +89,10 @@ export const tasks = [
         description: "",
         creationDate: '2022-01-31',
         users: [3, 2],
-        categories: [0, 1, 3, 4],        
+        categories: [0, 1, 3, 4],
         attached: [],
         comments: [],
-        pic: "/img//qWwpHwip31M.jpg"
-    },    
+        pic: "/img//qWwpHwip31M.jpg",
+        section: 3
+    },
 ]

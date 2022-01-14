@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,eAAe,AAAC,CEKZ,OAAO,CAAE,IAAI,CACb,cAAc,CAAE,GAAG,CACnB,eAAe,CAAE,UAAU,CAC3B,WAAW,CAAE,MAAM,CFNnB,gBAAgB,CCgCA,OAAO,CD/BvB,OAAO,CAAE,IAAI,CAChB,AAED,AAAA,KAAK,AAAC,CACF,KAAK,CCmBS,OAAO,CDlBxB,AAED,AAAA,KAAK,AAAA,MAAM,AAAC,CACR,KAAK,CCiBc,IAAO,CDhB7B,AAED,AAAA,KAAK,AAAC,CACF,KAAK,CCWS,OAAO,CDVxB",
+    "sources": [
+        "../../components/Home/SectionFooter.module.scss",
+        "../lib/_vars.scss",
+        "../lib/_mixins.scss"
+    ],
+    "names": [],
+    "file": "SectionFooter.module.css"
+}

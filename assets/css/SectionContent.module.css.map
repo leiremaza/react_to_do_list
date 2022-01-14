@@ -1,0 +1,11 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,gBAAgB,AAAC,CE0Bb,OAAO,CAAE,IAAI,CACb,cAAc,CAAE,MAAM,CACtB,WAAW,CAAE,UAAU,CACvB,aAAa,CAAE,MAAM,CF3BrB,gBAAgB,CC8BP,OAAO,CD7BhB,OAAO,CAAE,MAAM,CAClB",
+    "sources": [
+        "../../components/Home/SectionContent.module.scss",
+        "../lib/_vars.scss",
+        "../lib/_mixins.scss"
+    ],
+    "names": [],
+    "file": "SectionContent.module.css"
+}

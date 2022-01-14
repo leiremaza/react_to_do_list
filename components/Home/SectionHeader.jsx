@@ -1,14 +1,19 @@
-import React from 'react'
+import React, { useContext} from 'react'
 import styles from "./SectionHeader.module.scss"
 
+import { TasksContext } from '../../contexts/TasksContext';
 import { categories } from './../../models/categories'
 import MyButton from '../Dsys/MyButton'
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import MoreHoriRoundedIcon from '@material-ui/icons/MoreHoriz';
 
-const SectionHeader = (props) => {
+const SectionHeader = ({index}) => {
 
-    const category = categories.find(category => category.id == props.category);
+    const { sections } = useContext(TasksContext);
+
+    const section = sections[index];
+
+    const category = categories.find(category => category.id == section.category);
 
     const progressClass = [
         category.color == "red" ? styles.red :
@@ -21,7 +26,7 @@ const SectionHeader = (props) => {
     return (
         <div className={styles.section_header}>
             <div className={styles.section_title}>
-                <h3 className={styles.text}>{props.title}:</h3>
+                <h3 className={styles.text}>{section.title}:</h3>
                 <progress className={progressClass.join(" ")} max="100" value="80"/>
             </div>
             <div className={styles.section_ctas}>

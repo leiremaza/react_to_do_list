@@ -10,20 +10,20 @@ import SectionFooter from "./SectionFooter"
 
 const Home = () => {
 
-    const { state, onDragEnd, sections } = useContext(TasksContext);
+    const { state, onDragEnd } = useContext(TasksContext);
 
     return (
 
         <div className={styles.home}>
             <SearchBox />
             <div className={styles.sections}>
-                <DragDropContext onDragEnd={onDragEnd}>
+                {/* <DragDropContext onDragEnd={onDragEnd}>
                     {
                         state.map((section, index) => (
                             <Droppable key={index} droppableId={`${index}`}>
                                 {(provided) => (
                                     <section className={styles.section} ref={provided.innerRef} {...provided.droppableProps}>
-                                        <SectionHeader title={sections[index].title} category={sections[index].category} />
+                                        {/* <SectionHeader index={index} /> }
                                         <SectionContent section={section} />
                                         {provided.placeholder}
                                         <SectionFooter />
@@ -32,7 +32,7 @@ const Home = () => {
                             </Droppable>
                         ))
                     }
-                </DragDropContext>
+                </DragDropContext> */}
             </div>
         </div>
     )

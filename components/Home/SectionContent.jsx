@@ -10,7 +10,7 @@ const SectionContent = ({section}) => {
         <div className={styles.section_content}>
             {
                 section.map((task, index) => (
-                    <Draggable key={task.id} draggableId={`${task.id}`} index={index}>
+                    <Draggable key={index} draggableId={`${task.id}`} index={index}>
                         {(provided) => (
                             <SingleCard task={task} provided={provided}/>
                         )}

@@ -1,15 +1,81 @@
-import React, { createContext, useState } from 'react'
-import { sections as sections_} from './../models/sections'
-import { tasks as tasks_ } from './../models/tasks'
+import React, { createContext, useEffect, useState } from 'react'
 
 export const TasksContext = createContext();
 
 const TasksContextProvider = ({ children }) => {
 
-    const [sections, setSections] = useState([sections_[0], sections_[1], sections_[2], sections_[3]]);
-    const tasks = sections.map(section => section.tasks.map(taskId => tasks_.find(task => task.id === taskId)));
-    const [state, setState] = useState([tasks[0], tasks[1], tasks[2], tasks[3]]);
-    //const [state, setState] = useState([sections_[0], sections_[1], sections_[2], sections_[3]]);
+    const [tasks, setTasks] = useState([]);
+    const [state, setState] = useState([]);
+   
+    const groupTasksBySections = (array) => array.reduce(function (r, a) {
+        r[a.section] = r[a.section] || [];
+        r[a.section].push(a);
+        return r;
+    }, []);
+
+    useEffect(async () => {
+        /*let url = "http://localhost:3000/tasks";
+        let param = {
+            headers: {
+                "Content-type":"application/json; charset= UTF-8"
+            },
+            method: "GET"
+        }
+        try {
+            let data = await fetch(url, param);
+            let result = await data.json;
+            console.log(result);
+        }
+        catch(error) {
+            console.log(error);
+        }*/
+        const todos = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.todos);
+        console.log(todos);
+        /*setTasks(todos);
+        setState(groupTasksBySections(todos));*/
+    }, [])
+
+    /***********************************/
+    /*              Tasks              */
+    /***********************************/
+
+   /*const addTask = (task) => {
+        const newTasks = [...tasks];
+        newTasks.push(task);
+        setTasks(newTasks);
+        setState(groupTasksBySections(newTasks));
+    }
+
+    const editTask = (task) => {
+        const newTasks = [...tasks];
+        const index = newTasks.findIndex(task => task.id == id);
+        newTasks.splice(index - 1, 1, task);
+        setTasks(newTasks);
+        setState(groupTasksBySections(newTasks));
+    }
+
+    const deleteTask = (id) => {
+        const newTasks = [...tasks];
+        const index = newTasks.findIndex(task => task.id == id);
+        newTasks.splice(index, 1);
+        setTasks(newTasks);
+        setState(groupTasksBySections(newTasks));
+    }*/
+
+    const removeTask = async (id) => {
+        console.log(id);
+        await fetch({
+            url: "http://localhost:3000/tasks/" + id,
+            method: "DELETE"
+        });
+        const todos = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.todos);
+        setTasks(todos);
+        setState(groupTasksBySections(todos));
+    }
+
+    /***********************************/
+    /*              State              */
+    /***********************************/
 
     const reorder = (list, startIndex, endIndex) => {
         const result = Array.from(list);
@@ -59,29 +125,11 @@ const TasksContextProvider = ({ children }) => {
         }
     }
 
-    const addNewSection = () => {
-        setState([...state, []]);
-    }
-
-    const addNewTask = () => {
-        setState([...state, getItems(1)]);
-    }
-
-    const deleteTask = (index) => {
-        const newState = [...state];
-        newState[index].splice(index, 1);
-        setState(
-            newState.filter(group => group.length)
-        );
-    }
-
     const value = {
-        sections,
+        tasks,
         state,
-        onDragEnd, 
-        addNewSection,
-        addNewTask,
-        deleteTask,
+        onDragEnd,
+        removeTask
     }
 
     return (

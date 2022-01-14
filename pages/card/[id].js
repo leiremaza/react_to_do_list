@@ -1,37 +1,32 @@
 import { useRouter } from 'next/dist/client/router'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import FormCard from "../../components/Card/FormCard"
 import { TasksContext } from '../../contexts/TasksContext'
 
 const id = () => {
 
-    let task;
-
     const { state } = useContext(TasksContext);
-    const { query } = useRouter();
+    const router = useRouter();
+    const [queryId, setQueryId] = useState();
 
     useEffect(() => {
-        if(typeof query.id !== "undefined")
+        if (!router.isReady) return;
         {
-            console.log(query.id);
             state.forEach(section => {
-                // console.log(section);
                 section.forEach(task_ => {
-                    // console.log(task_.id);
-                    if (task_.id == query.id) {
-                        task = task_;
-                        console.log(task);
+                    if (task_.id == router.query.id) {
+                        setQueryId(task_);
                     }
                 });
             });
         }
-    }, [query])
+    }, [router.query])
 
     return (
         <div>
-            { 
-                (typeof task !== "undefined") ? <FormCard task={task} /> : null
+            {
+                (typeof queryId !== "undefined") ? <FormCard task={queryId} /> : null
             }
         </div>
     )

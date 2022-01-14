@@ -26,7 +26,7 @@ const SingleCard = (props) => {
     const categoryClass = styles.category + " ";
     const date = dayjs(props.task.creationDate).locale('es').format('MMM DD YYYY');
 
-    const { deleteTask } = useContext(TasksContext);
+    const { removeTask } = useContext(TasksContext);
 
     return (
         <Link href={'/card/' + props.task.id} className={styles.link}>
@@ -38,8 +38,8 @@ const SingleCard = (props) => {
                         </div>
                         <h4 className={styles.date}>{date}</h4>
                     </div>
-                    <div className={styles.remove_button}>
-                        <MyButton theme="secondary" content="icon" /*onClick={deleteTask(props.task.id)}*/>
+                    <div className={styles.remove_button} onClick={() => removeTask(props.task.id)}>
+                        <MyButton theme="secondary" content="icon">
                             <DeleteOutlinedIcon className={styles.icon} />
                         </MyButton>
                     </div>
