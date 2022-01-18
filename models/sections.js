@@ -2,25 +2,21 @@ export const sections = [
     {
         id: 0,
         title: "To Do",
-        category: 4,
-        tasks: [0, 1, 2]
+        category: 4
     },
     {
         id: 1,
         title: "Doing",
-        category: 2,
-        tasks: [3, 4]
+        category: 2
     },
     {
         id: 2,
         title: "Done",
-        category: 3,
-        tasks: [5]
+        category: 3
     },
     {
         id: 3,
         title: "Test",
-        category: 1,
-        tasks: [6, 7]
+        category: 1
     }
 ]

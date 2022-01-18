@@ -15,7 +15,6 @@ const id = () => {
         {
             console.log(router.query.id);
             state.forEach(section => {
-                // console.log(section);
                 section.forEach(task_ => {
                     // console.log(task_.id);
                     if (task_.id == router.query.id) {

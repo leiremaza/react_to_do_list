@@ -19,12 +19,12 @@ const Home = () => {
             <div className={styles.sections}>
                 <DragDropContext onDragEnd={onDragEnd}>
                     {
-                        state.map((section, index) => (
+                        state.map((column, index) => (
                             <Droppable key={index} droppableId={`${index}`}>
                                 {(provided) => (
                                     <section className={styles.section} ref={provided.innerRef} {...provided.droppableProps}>
-                                        <SectionHeader title={sections[index].title} category={sections[index].category} />
-                                        <SectionContent section={section} />
+                                        <SectionHeader index={index} />
+                                        <SectionContent column={column} />
                                         {provided.placeholder}
                                         <SectionFooter />
                                     </section>
