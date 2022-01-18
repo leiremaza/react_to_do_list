@@ -43,13 +43,13 @@ const FormCard = (props) => {
           setPopOpenedCategories(!popOpenedCategories)
       }
 
-      const MyButton = React.forwardRef(({ onClick, href }, ref) => {
-        return (
-          <a href={href} onClick={onClick} ref={ref}>
-            Click Me
-          </a>
-        )
-      })
+    //   const MyButton = React.forwardRef(({ onClick, href }, ref) => {
+    //     return (
+    //       <a href={href} onClick={onClick} ref={ref}>
+    //         Click Me
+    //       </a>
+    //     )
+    //   })
 
     return (
         <div className={styles.bg_card}>
@@ -64,7 +64,7 @@ const FormCard = (props) => {
                 <div className={styles.card_content}>
                         <div className={styles.card_title}>
                             <input id="title" name="title" type="text" className={styles.title}
-                            placeholder={task.title} disable/>
+                            placeholder={task.title} disable="true"/>
                         </div>
                         <div className={styles.creation_date}>
                             <div className={styles.clock}>

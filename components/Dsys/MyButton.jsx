@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './MyButton.module.scss'
 
-const MyButton = React.forwardRef((props, onClick, href, ref) => {
+const MyButton = React.forwardRef(({onClick, href, ...props}, ref) => {
 
    const buttonClass = [
         styles["button-" + props.content], 
