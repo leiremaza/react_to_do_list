@@ -6,7 +6,13 @@ const TasksContextProvider = ({ children }) => {
 
     const [tasks, setTasks] = useState([]);
     const [state, setState] = useState([]);
-   
+    const [sections, setSections] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [attachments, setAttachments] = useState([]);
+    const [comments, setComments] = useState([]);
+    const [dataLoaded, setDataLoaded] = useState(false);
+
     const groupTasksBySections = (array) => array.reduce(function (r, a) {
         r[a.section] = r[a.section] || [];
         r[a.section].push(a);
@@ -14,64 +20,125 @@ const TasksContextProvider = ({ children }) => {
     }, []);
 
     useEffect(async () => {
-        /*let url = "http://localhost:3000/tasks";
-        let param = {
-            headers: {
-                "Content-type":"application/json; charset= UTF-8"
-            },
-            method: "GET"
-        }
-        try {
-            let data = await fetch(url, param);
-            let result = await data.json;
-            console.log(result);
-        }
-        catch(error) {
-            console.log(error);
-        }*/
-        const todos = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.todos);
-        console.log(todos);
-        /*setTasks(todos);
-        setState(groupTasksBySections(todos));*/
+        const data = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.data);
+        setTasks(data);
+        setState(groupTasksBySections(data));
+        data = await fetch("http://localhost:3000/sections").then(d => d.json()).then(d => d.data);
+        setSections(data);
+        data = await fetch("http://localhost:3000/users").then(d => d.json()).then(d => d.data);
+        setUsers(data);
+        data = await fetch("http://localhost:3000/categories").then(d => d.json()).then(d => d.data);
+        setCategories(data);
+        data = await fetch("http://localhost:3000/attachments").then(d => d.json()).then(d => d.data);
+        setAttachments(data);
+        data = await fetch("http://localhost:3000/comments").then(d => d.json()).then(d => d.data);
+        setComments(data);
+        setDataLoaded(true);
     }, [])
 
     /***********************************/
     /*              Tasks              */
     /***********************************/
 
-   /*const addTask = (task) => {
-        const newTasks = [...tasks];
-        newTasks.push(task);
-        setTasks(newTasks);
-        setState(groupTasksBySections(newTasks));
+    const addTask = async (task) => {
+
+        const url = "http://localhost:3000/tasks";
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: "Holaaaaaa",
+                description: "Hacer la compra",
+                creationDate: "2022-01-17T13:28:53.782Z",
+                users: [0, 3, 4],
+                categories: [0, 2],
+                attachments: [1, 2],
+                comments: [2, 4],
+                pic: "",
+                section: 2
+            })
+        };
+
+        setDataLoaded(false);
+
+        await fetch(url, requestOptions).then(d => d.json()).then(d => d.data);
+        const data = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.data);
+        setTasks(data);
+        setState(groupTasksBySections(data));
+
+        setDataLoaded(true);
     }
 
-    const editTask = (task) => {
-        const newTasks = [...tasks];
-        const index = newTasks.findIndex(task => task.id == id);
-        newTasks.splice(index - 1, 1, task);
-        setTasks(newTasks);
-        setState(groupTasksBySections(newTasks));
-    }
+    const editTask = async (task) => {
 
-    const deleteTask = (id) => {
-        const newTasks = [...tasks];
-        const index = newTasks.findIndex(task => task.id == id);
-        newTasks.splice(index, 1);
-        setTasks(newTasks);
-        setState(groupTasksBySections(newTasks));
-    }*/
+        const url = "http://localhost:3000/tasks/" + task.id;
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: "Adios",
+                description: "Hacer la compra",
+                creationDate: "2022-01-17T13:28:53.782Z",
+                users: [0, 3, 4],
+                categories: [0, 2],
+                attachments: [1, 2],
+                comments: [2, 4],
+                pic: "",
+                section: 3
+            })
+        };
+
+        setDataLoaded(false);
+
+        await fetch(url, requestOptions).then(d => d.json()).then(d => d.data);
+        const data = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.data);
+        setTasks(data);
+        setState(groupTasksBySections(data));
+
+        setDataLoaded(true);
+    }
 
     const removeTask = async (id) => {
-        console.log(id);
-        await fetch({
-            url: "http://localhost:3000/tasks/" + id,
-            method: "DELETE"
-        });
-        const todos = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.todos);
-        setTasks(todos);
-        setState(groupTasksBySections(todos));
+
+        const url = "http://localhost:3000/tasks/" + id;
+        const requestOptions = {
+            method: 'DELETE'
+        };
+
+        setDataLoaded(false);
+
+        await fetch(url, requestOptions).then(d => d.json()).then(d => d.data);
+        const data = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.data);
+        setTasks(data);
+        setState(groupTasksBySections(data));
+
+        setDataLoaded(true);
     }
+
+    /***********************************/
+    /*             Sections            */
+    /***********************************/
+
+
+    /***********************************/
+    /*              Users              */
+    /***********************************/
+
+
+    /***********************************/
+    /*           Categories            */
+    /***********************************/
+
+
+    /***********************************/
+    /*           Attachments           */
+    /***********************************/
+
+
+    /***********************************/
+    /*            Comments             */
+    /***********************************/
+
 
     /***********************************/
     /*              State              */
@@ -126,10 +193,14 @@ const TasksContextProvider = ({ children }) => {
     }
 
     const value = {
-        tasks,
-        state,
-        onDragEnd,
-        removeTask
+        dataLoaded,
+        tasks, addTask, editTask, removeTask,
+        sections,
+        users,
+        categories,
+        attachments,
+        comments,
+        state, onDragEnd,
     }
 
     return (

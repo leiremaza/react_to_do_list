@@ -17,14 +17,14 @@ const Home = () => {
         <div className={styles.home}>
             <SearchBox />
             <div className={styles.sections}>
-                {/* <DragDropContext onDragEnd={onDragEnd}>
+                <DragDropContext onDragEnd={onDragEnd}>
                     {
-                        state.map((section, index) => (
+                        state.map((column, index) => (
                             <Droppable key={index} droppableId={`${index}`}>
                                 {(provided) => (
                                     <section className={styles.section} ref={provided.innerRef} {...provided.droppableProps}>
-                                        {/* <SectionHeader index={index} /> }
-                                        <SectionContent section={section} />
+                                        <SectionHeader index={index} />
+                                        <SectionContent column={column} />
                                         {provided.placeholder}
                                         <SectionFooter />
                                     </section>
@@ -32,7 +32,7 @@ const Home = () => {
                             </Droppable>
                         ))
                     }
-                </DragDropContext> */}
+                </DragDropContext>
             </div>
         </div>
     )

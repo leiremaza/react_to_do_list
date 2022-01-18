@@ -4,15 +4,15 @@ import styles from "./SectionContent.module.scss"
 import SingleCard from "./SingleCard"
 import { Draggable } from 'react-beautiful-dnd'
 
-const SectionContent = ({section}) => {
+const SectionContent = ({column}) => {
 
     return (
         <div className={styles.section_content}>
             {
-                section.map((task, index) => (
+                column.map((task, index) => (
                     <Draggable key={index} draggableId={`${task.id}`} index={index}>
                         {(provided) => (
-                            <SingleCard task={task} provided={provided}/>
+                            <SingleCard index={task.id} provided={provided}/>
                         )}
                     </Draggable>
                 ))
