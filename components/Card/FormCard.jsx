@@ -52,16 +52,6 @@ const FormCard = (props) => {
     //   })
 
 
-    const [popOpened, setPopOpened] = useState(false)
-    const menuClasses = [
-        "menu",
-        popOpened ? "opened" : null
-      ].join("")
-    
-      const togglePop = () => {
-        setPopOpened(!popOpened)
-      }
-
     /*---AÑADIR USERS---*/
 
     const [addUsers, setAddUsers] = useState(users)
