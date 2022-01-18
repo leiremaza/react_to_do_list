@@ -51,6 +51,32 @@ const FormCard = (props) => {
     //     )
     //   })
 
+
+    const [popOpened, setPopOpened] = useState(false)
+    const menuClasses = [
+        "menu",
+        popOpened ? "opened" : null
+      ].join("")
+    
+      const togglePop = () => {
+        setPopOpened(!popOpened)
+      }
+
+    /*---AÑADIR USERS---*/
+
+    const [addUsers, setAddUsers] = useState(users)
+    const addUser = (u) => {
+        console.log(u)
+      // construimos un array nuevo
+      const newUsers = [...addUsers]
+      newUsers.push(u)
+  
+      // lo seteamos
+      setAddUsers(newUsers)
+    }
+
+  
+
     return (
         <div className={styles.bg_card}>
             <div className={styles.card}>
@@ -75,7 +101,7 @@ const FormCard = (props) => {
                     <div className={styles.users_and_categories}>
                         <div className={styles.users}>
                             {
-                                users.map((user, i_) => (
+                                addUsers.map((user, i_) => (
                                     <div className={styles.user} key={i_}>
                                         <img src={"../" + user.pic} alt={user.name} />
                                     </div>
@@ -85,8 +111,8 @@ const FormCard = (props) => {
                                 <MyButton theme="default" content="icon" onClick={togglePop}>
                                     <AddRoundedIcon fontSize="small" />
                                 </MyButton>
-                                <div className={styles[menuClasses]}>
-                                    <FormCardPopAddUsers />
+                                <div className={styles[menuClasses]} >
+                                    <FormCardPopAddUsers addUser={addUser}/>
                                 </div>
                             </div>
                         </div>

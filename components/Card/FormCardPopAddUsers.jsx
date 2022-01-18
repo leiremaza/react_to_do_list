@@ -1,9 +1,11 @@
-import React from 'react'
+import {React, useState} from 'react'
 import styles from "./FormCardPopAddUsers.module.scss"
-import { users, users as users_ } from './../../models/users'
+import { users as users_ } from './../../models/users'
 
+const FormCardPopAddUsers = ({addUser}) => {
 
-const FormCardPopAddUsers = () => {
+    
+
     return (
         <div className={styles.pop_add_users}>
             
@@ -12,7 +14,7 @@ const FormCardPopAddUsers = () => {
             </div>
             <div className={styles.add_users}>
                 {users_.map((user,i_) => (
-                    <div className={styles.user} key={i_}>
+                    <div className={styles.user} key={i_} onClick={() => {addUser(user)}}>
                         <div className={styles.user_pic}>
                         <img src={user.pic} alt="" />
                         </div>

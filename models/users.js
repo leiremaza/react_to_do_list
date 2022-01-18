@@ -44,7 +44,7 @@ export const users = [
     {
         id: 7,
         name: "Brent Goodman",
-        pic: "/img//brent_goodman,png",
+        pic: "/img//brent_goodman.png",
         is_master: false
     },
 ]
