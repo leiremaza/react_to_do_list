@@ -16,9 +16,12 @@ import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
 import { Field, Form, Formik } from 'formik'
 import { TextareaAutosize } from '@material-ui/core'
+import FormCardPopAddUsers from './FormCardPopAddUsers'
+
+import { useState } from 'react'
+import FormCardPopAddCategories from './FormCardPopAddCategories'
 
 const FormCard = (props) => {
-    console.log(props.task);
     const task = props.task;
 
     const categories = task.categories.map(categoryId => categories_.find(category => category.id === categoryId));
@@ -62,11 +65,41 @@ const FormCard = (props) => {
         writeFileSync(path.resolve("tasks.js"), JSON.stringify(todos, null, 2), { flag: "w" })
     }
 
+
+    const [popOpened, setPopOpened] = useState(false)
+    const menuClasses = [
+        "menu",
+        popOpened ? "opened" : null
+      ].join("")
+    
+      const togglePop = () => {
+        setPopOpened(!popOpened)
+      }
+
+    /*---AÑADIR USERS---*/
+
+    const [addUsers, setAddUsers] = useState(users)
+    const addUser = (u) => {
+        console.log(u)
+      // construimos un array nuevo
+      const newUsers = [...addUsers]
+      newUsers.push(u)
+  
+      // lo seteamos
+      setAddUsers(newUsers)
+    }
+
+  
+
     return (
-        <Formik
+        
+
+        
+        <Formik 
             initialValues={{title: "", description: task.description}}
             onSubmit={(data) => {setData(data)}}
         >
+            <div className={styles.bg_card}>
             <Form className={styles.card}>
                 <div className={styles.card_header}>
                     <Link href="/">
@@ -90,15 +123,20 @@ const FormCard = (props) => {
                     <div className={styles.users_and_categories}>
                         <div className={styles.users}>
                             {
-                                users.map((user, i_) => (
+                                addUsers.map((user, i_) => (
                                     <div className={styles.user} key={i_}>
                                         <img src={"../" + user.pic} alt={user.name} />
                                     </div>
                                 ))
                             }
-                            <MyButton theme="default" content="icon">
-                                <AddRoundedIcon fontSize="small" />
-                            </MyButton>
+                            <div className={styles.pop_add}>
+                                <MyButton theme="default" content="icon" onClick={togglePop}>
+                                    <AddRoundedIcon fontSize="small" />
+                                </MyButton>
+                                <div className={styles[menuClasses]} >
+                                    <FormCardPopAddUsers addUser={addUser}/>
+                                </div>
+                            </div>
                         </div>
                         <div className={styles.categories}>
                             {
@@ -106,9 +144,16 @@ const FormCard = (props) => {
                                     <div key={i_} className={categoriesClass.concat(styles[category.color])}></div>
                                 ))
                             }
-                            <MyButton theme="default" content="icon">
-                                <AddRoundedIcon fontSize="small" />
-                            </MyButton>
+                            
+
+                            <div className={styles.pop_add}>
+                                <MyButton theme="default" content="icon" onClick={togglePop}>
+                                    <AddRoundedIcon fontSize="small" />
+                                </MyButton>
+                                <div className={styles[menuClasses]}>
+                                    <FormCardPopAddCategories />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className={styles.description}>
@@ -169,7 +214,7 @@ const FormCard = (props) => {
                     </div>
                 </div>
                 <div className={styles.card_footer}>
-                    <MyButton type="submit" content="text" theme="primary">
+                    <MyButton type="button" content="text" theme="primary">
                         <h5 className={styles.add}>Add</h5>
                     </MyButton>
                     <MyButton type="reset" content="text" theme="secondary" >
@@ -177,6 +222,7 @@ const FormCard = (props) => {
                     </MyButton>
                 </div>
             </Form>
+            </div>
         </Formik>
     )
 }

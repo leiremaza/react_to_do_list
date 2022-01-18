@@ -1,17 +1,31 @@
 @import './../../assets/lib/vars';
 @import './../../assets/lib/mixins';
 
+.bg_card{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: rgba(72, 72, 72, .7)}
+
 .card {
-    @include flex-column-start-center;
+    //@include flex-column-center-center;
+    display: flex;
+    flex-direction: column;
+    
     background-color: $bg_header;
     border-radius: .5rem;
-    padding: 1rem;
-    width: 548px;
+    
+    padding: 2rem;
+    width: 600px;
+    height: auto;
 }
 
 .card_header {
     @include flex-end-center;
-    width: 100%;
+    width: auto;
+    justify-content: flex-end
 }
 
 /************** CONTENT ****************/
@@ -19,20 +33,19 @@
 .card_content {
     @include flex-column-start-center;
     margin-bottom: 1rem;
-    padding: 0 1.5rem;
     width: 100%;
 }
 
 .card_title {
     margin-bottom: .25rem;
     width: 100%;
+    margin-bottom: .5rem;
+
 }
 
 .card_title .title {
     width: 100%;
-    padding: .25rem .05rem;
     background-color: $bg_header;
-
     font-family: $font_family_base;
     font-size: 20px;
     font-weight: 700;
@@ -46,7 +59,9 @@
 
 .creation_date {
     @include flex-start-center;
-    margin-bottom: 1rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+
     width: 100%;
 }
 
@@ -67,14 +82,24 @@
 
 .users_and_categories {
     @include flex-spacebetween-center;
-    margin-bottom: 1rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
     width: 100%;
 }
 
-.users, .categories {
+.categories {
     @include flex-start-center;
 }
-
+.users{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+.pop_add{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+}
 .user {
     @include flex-start-center;
     @include margin-between-elements(.5rem);
@@ -83,8 +108,8 @@
 }
 
 .user img {
-    height: 1.25rem;
-    width: 1.25rem;
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
 .category {
@@ -115,7 +140,8 @@
 
 .description {
     @include flex-column-start-center;
-    margin-bottom: 1rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
     width: 100%;
 }
 
@@ -125,8 +151,8 @@
 }
 
 .description .text {
-    width: 100%;
-    padding: .35rem;
+    width: 585px;
+    padding: .5rem;
 
     border: none;
     resize: none;
@@ -140,7 +166,9 @@
 }
 
 .picture {
-    margin-bottom: 1rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+
     width: 100%;
 }
 
@@ -153,13 +181,15 @@
 
 .attatched_files {
     @include flex-column-start-center;
-    margin-bottom: 1rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+
     width: 100%;
 }
 
 .attached_header {
     @include flex-start-center;
-    margin-bottom: .5rem;
+    margin-bottom: .75rem;
     margin-left: -6px;
 }
 
@@ -187,13 +217,16 @@
 
 .comments {
     @include flex-column-start-center;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+
     width: 100%;
 }
 
 .comments_header {
     @include flex-start-center;
+    margin-top: .5rem;
     margin-bottom: .5rem;
-    margin-left: -6px;
 }
 
 .comments_header .icon {
@@ -230,9 +263,8 @@
 }
 
 .input_control {
-    width: 100%;
-    padding: .4rem .625rem;
-
+    width: 550px;
+    padding: .5rem;
     font-family: $font_family_base;
     font-size: 12px;
     font-weight: 400;
@@ -243,7 +275,6 @@
 
 .card_footer {
     @include flex-start-center;
-    padding: 0 1.5rem;
     width: 100%;
 }
 
@@ -259,4 +290,14 @@
 
 .delete:hover {
     color: $fore_color_secondary;
+}
+
+
+/************* MENU ADD USERS **************/
+
+.menu{
+    display: block;
+    .opened{
+        display: block;
+    }
 }
