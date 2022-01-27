@@ -1,5 +1,6 @@
 @import './../../assets/lib/vars';
 @import './../../assets/lib/mixins';
+
 .bg_card{
     display: flex;
     justify-content: center;
@@ -96,22 +97,9 @@
 .category {
     @include flex-start-center;
     @include margin-between-elements(.5rem);
-    background-color: $fore_color_light_grey;
     height: 1.25rem;
     width: 1.5rem;
     border-radius: .25rem;
-}
-.category.red {
-    background-color: $bg_red;
-}
-.category.orange {
-    background-color: $bg_orange;
-}
-.category.green {
-    background-color: $bg_green;
-}
-.category.blue {
-    background-color: $bg_blue;
 }
 .description {
     @include flex-column-start-center;

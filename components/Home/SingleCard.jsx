@@ -45,7 +45,7 @@ const SingleCard = (props) => {
                 <div className={styles.categories}>
                     {
                         taskCategories.map((category, i_) => (
-                            <div key={i_} className={styles.category.concat(styles[category.color])}></div>
+                            <div key={i_} className={styles.category} style={{background: `${category.color}`}}></div>
                         ))
                     }
                 </div>
