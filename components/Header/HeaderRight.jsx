@@ -4,10 +4,11 @@ import styles from './HeaderRight.module.scss'
 import { users } from  './../../models/users'
 import MyButton from '../Dsys/MyButton'
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
-
+import { useState } from 'react'
+import FormCardPopAddUsers from "../Card/FormCardPopAddUsers"
 const HeaderRight = () => {
-
     const masterUsers = users.filter((user) => user.is_master);
+
 
     return (
         <div className={styles.header_right}>
@@ -25,6 +26,7 @@ const HeaderRight = () => {
                 <MyButton theme="secondary" content="icon">
                     <AddRoundedIcon className={styles.icon}/>
                 </MyButton>
+                
             </div>
         </div>
     )
