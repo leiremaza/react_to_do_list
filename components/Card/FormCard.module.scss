@@ -8,9 +8,9 @@
     height: 100vh;
     background: rgba(72, 72, 72, .7)}
 .card {
-    //@include flex-column-center-center;
-    display: flex;
-    flex-direction: column;
+    @include flex-column-start-center;
+    //display: flex;
+    //flex-direction: column;
     
     background-color: $bg_header;
     border-radius: .5rem;
@@ -21,7 +21,7 @@
 }
 .card_header {
     @include flex-end-center;
-    width: auto;
+    width: 100%;
     justify-content: flex-end
 }
 /************** CONTENT ****************/
@@ -212,7 +212,7 @@
     width: 100%;
 }
 .input_control {
-    width: 550px;
+    width: 480px;
     padding: .5rem;
     font-family: $font_family_base;
     font-size: 12px;

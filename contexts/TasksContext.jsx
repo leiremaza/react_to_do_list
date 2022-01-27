@@ -62,7 +62,7 @@ const TasksContextProvider = ({ children }) => {
     const addNewSection = () => {
         const nueva = {
             id: 4,
-            title: "Hola",
+            title: "Add new title",
             category: 2,
             tasks: []
         }

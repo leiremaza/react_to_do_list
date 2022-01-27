@@ -20,7 +20,7 @@ const index = () => {
           (
             <div className={styles.app}>
               <header className={styles.header}>
-                <HeaderLeft />
+                <HeaderLeft/>
                 <HeaderRight />
               </header>
               <main className={styles.content}>
