@@ -63,7 +63,6 @@
 }
 
 .category {
-    background-color: $fore_color_light_grey;
     height: .25rem;
     width: 1.25rem;
     border-radius: .25rem;
@@ -72,22 +71,6 @@
     &:last-child {
         margin-right: 0;
     }
-}
-
-.category.red {
-    background-color: $bg_red;
-}
-
-.category.orange {
-    background-color: $bg_orange;
-}
-
-.category.green {
-    background-color: $bg_green;
-}
-
-.category.blue {
-    background-color: $bg_blue;
 }
 
 .picture {

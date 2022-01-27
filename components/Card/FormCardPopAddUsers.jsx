@@ -1,10 +1,8 @@
-import {React, useState} from 'react'
+import React, { useState } from 'react'
 import styles from "./FormCardPopAddUsers.module.scss"
 import { users as users_ } from './../../models/users'
 
 const FormCardPopAddUsers = ({addUser}) => {
-
-    
 
     return (
         <div className={styles.pop_add_users}>

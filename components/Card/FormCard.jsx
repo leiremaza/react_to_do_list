@@ -1,30 +1,31 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import styles from "./FormCard.module.scss"
+
 import Link from 'next/link'
 import dayjs from 'dayjs'
 import MyButton from '../Dsys/MyButton'
-import { categories as categories_ } from './../../models/categories'
-import { users as users_ } from './../../models/users'
-import { attached as attached_ } from './../../models/attached'
-import { comments as comments_ } from './../../models/comments'
+import FormCardPopAddUsers from './FormCardPopAddUsers'
+import FormCardPopAddCategories from './FormCardPopAddCategories'
+
+import { TextareaAutosize } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import AddRoundedIcon from '@material-ui/icons/AddRounded';
 import AccessTimeOutlinedIcon from '@material-ui/icons/AccessTimeOutlined';
 import AttachFileOutlinedIcon from '@material-ui/icons/AttachFileOutlined';
 import ChatBubbleOutlineRoundedIcon from '@material-ui/icons/ChatBubbleOutlineRounded';
-import { TextareaAutosize } from '@material-ui/core'
-import FormCardPopAddUsers from './FormCardPopAddUsers'
-import { useState } from 'react'
-import FormCardPopAddCategories from './FormCardPopAddCategories'
+import { TasksContext } from '../../contexts/TasksContext'
 
-const FormCard = (props) => {
+const FormCard = ({ id }) => {
 
-    const task = props.task;
-    const categories = task.categories.map(categoryId => categories_.find(category => category.id === categoryId));
-    const users = task.users.map(userId => users_.find(user => user.id === userId));
-    const attached = task.attachments.map(attachedId => attached_.find(a => a.id === attachedId));
-    const comments = task.comments.map(commentId => comments_.find(comment => comment.id === commentId));
-    const categoriesClass = styles.category + " ";
+    const { tasks, categories, users, attachments, comments, addTask, editTask, removeTask } = useContext(TasksContext);
+
+    const task = tasks.find(t => t.id == id);
+
+    const taskCategories = task.categories.map(id => categories.find(c => c.id === id));
+    const taskUsers = task.users.map(id => users.find(u => u.id === id));
+    const taskAttachments = task.attachments.map(id => attachments.find(a => a.id === id));
+    const taskComments = task.comments.map(id => comments.find(c => c.id === id));
+
     const date = dayjs(task.creationDate).locale('es').format('MMM DD YYYY');
 
     const [popOpened, setPopOpened] = useState(false)
@@ -33,13 +34,16 @@ const FormCard = (props) => {
         "menu",
         popOpened ? "opened" : null,
     ].join("")
+
     const menuClasses2 = [
         "menu",
         popOpenedCategories ? "openedCategories" : null
     ].join("")
+
     const togglePop = () => {
         setPopOpened(!popOpened)
     }
+
     const togglePopCategories = () => {
         setPopOpenedCategories(!popOpenedCategories)
     }
@@ -52,12 +56,10 @@ const FormCard = (props) => {
     //     )
     //   })
 
-
     /*---AÑADIR USERS---*/
 
-    const [addUsers, setAddUsers] = useState(users)
+    const [addUsers, setAddUsers] = useState(taskUsers)
     const addUser = (u) => {
-        console.log(u)
         // construimos un array nuevo
         const newUsers = [...addUsers]
         newUsers.push(u)
@@ -65,8 +67,6 @@ const FormCard = (props) => {
         // lo seteamos
         setAddUsers(newUsers)
     }
-
-
 
     return (
         <div className={styles.bg_card}>
@@ -81,7 +81,7 @@ const FormCard = (props) => {
                 <div className={styles.card_content}>
                     <div className={styles.card_title}>
                         <input id="title" name="title" type="text" className={styles.title}
-                            placeholder={task.title} disable="true" />
+                                    placeholder="Title" value={task.title} disable="true" />
                     </div>
                     <div className={styles.creation_date}>
                         <div className={styles.clock}>
@@ -89,7 +89,6 @@ const FormCard = (props) => {
                         </div>
                         <h4 className={styles.date}>{date}</h4>
                     </div>
-                    <h4 className={styles.date}>{date}</h4>
                 </div>
                 <div className={styles.users_and_categories}>
                     <div className={styles.users}>
@@ -111,8 +110,8 @@ const FormCard = (props) => {
                     </div>
                     <div className={styles.categories}>
                         {
-                            categories.map((category, i_) => (
-                                <div key={i_} className={categoriesClass.concat(styles[category.color])}></div>
+                            taskCategories.map((category, i_) => (
+                                <div key={i_} className={styles.category} style={{background: `${category.color}`}}></div>
                             ))
                         }
                         <div className={styles.pop_add}>
@@ -144,7 +143,7 @@ const FormCard = (props) => {
                     </div>
                     <div className={styles.attached_content}>
                         {
-                            attached.map((attachment, i_) => (
+                            taskAttachments.map((attachment, i_) => (
                                 <div className={styles.file} key={i_}>
                                     <h5 className={styles.text}>{attachment.title}</h5>
                                 </div>
@@ -162,10 +161,10 @@ const FormCard = (props) => {
                     </div>
                     <div className={styles.comments_content}>
                         {
-                            comments.map((comment, i_) => (
+                            taskComments.map((comment, i_) => (
                                 <div className={styles.comment} key={i_}>
                                     <div className={styles.user}>
-                                        <img src={"../" + users_[comment.user].pic} alt={users_[comment.user].name} />
+                                        <img src={"../" + users[comment.user].pic} alt={users[comment.user].name} />
                                     </div>
                                     <h5 className={styles.text}>{comment.text}</h5>
                                 </div>
@@ -173,7 +172,7 @@ const FormCard = (props) => {
                         }
                         <form className={styles.form}>
                             <div className={styles.user}>
-                                <img src={"../" + users_[3].pic} alt={users_[3].name} />
+                                {/* <img src={"../" + users[3].pic} alt={users[3].name} /> */}
                             </div>
                             <div className={styles.msg_input}>
                                 <input className={styles.input_control} type="text" name="newMsg" placeholder="Add new comment..." />
@@ -183,7 +182,7 @@ const FormCard = (props) => {
                 </div>
             </div>
             <div className={styles.card_footer}>
-                <MyButton type="button" content="text" theme="primary">
+                <MyButton type="button" content="text" theme="primary" onClick={() => {editTask(task)}}>
                     <h5 className={styles.add}>Add</h5>
                 </MyButton>
                 <MyButton type="reset" content="text" theme="secondary" >

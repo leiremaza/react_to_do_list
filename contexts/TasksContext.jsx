@@ -1,8 +1,11 @@
+import { useRouter } from 'next/router';
 import React, { createContext, useEffect, useState } from 'react'
 
 export const TasksContext = createContext();
 
 const TasksContextProvider = ({ children }) => {
+
+    const router = useRouter();
 
     const [tasks, setTasks] = useState([]);
     const [state, setState] = useState([]);
@@ -20,20 +23,22 @@ const TasksContextProvider = ({ children }) => {
     }, []);
 
     useEffect(async () => {
-        const data = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.data);
-        setTasks(data);
-        setState(groupTasksBySections(data));
-        data = await fetch("http://localhost:3000/sections").then(d => d.json()).then(d => d.data);
-        setSections(data);
-        data = await fetch("http://localhost:3000/users").then(d => d.json()).then(d => d.data);
-        setUsers(data);
-        data = await fetch("http://localhost:3000/categories").then(d => d.json()).then(d => d.data);
-        setCategories(data);
-        data = await fetch("http://localhost:3000/attachments").then(d => d.json()).then(d => d.data);
-        setAttachments(data);
-        data = await fetch("http://localhost:3000/comments").then(d => d.json()).then(d => d.data);
-        setComments(data);
-        setDataLoaded(true);
+        if (!dataLoaded) {
+            let data = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.data);
+            setTasks(data);
+            setState(groupTasksBySections(data));
+            data = await fetch("http://localhost:3000/sections").then(d => d.json()).then(d => d.data);
+            setSections(data);
+            data = await fetch("http://localhost:3000/users").then(d => d.json()).then(d => d.data);
+            setUsers(data);
+            data = await fetch("http://localhost:3000/categories").then(d => d.json()).then(d => d.data);
+            setCategories(data);
+            data = await fetch("http://localhost:3000/attachments").then(d => d.json()).then(d => d.data);
+            setAttachments(data);
+            data = await fetch("http://localhost:3000/comments").then(d => d.json()).then(d => d.data);
+            setComments(data);
+            setDataLoaded(true);
+        }
     }, [])
 
     /***********************************/
@@ -46,17 +51,7 @@ const TasksContextProvider = ({ children }) => {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                title: "Holaaaaaa",
-                description: "Hacer la compra",
-                creationDate: "2022-01-17T13:28:53.782Z",
-                users: [0, 3, 4],
-                categories: [0, 2],
-                attachments: [1, 2],
-                comments: [2, 4],
-                pic: "",
-                section: 2
-            })
+            body: JSON.stringify(task)
         };
 
         setDataLoaded(false);
@@ -67,6 +62,9 @@ const TasksContextProvider = ({ children }) => {
         setState(groupTasksBySections(data));
 
         setDataLoaded(true);
+
+        const id = tasks.length;
+        await router.push('/card/' + id);
     }
 
     const editTask = async (task) => {
@@ -75,17 +73,7 @@ const TasksContextProvider = ({ children }) => {
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                title: "Adios",
-                description: "Hacer la compra",
-                creationDate: "2022-01-17T13:28:53.782Z",
-                users: [0, 3, 4],
-                categories: [0, 2],
-                attachments: [1, 2],
-                comments: [2, 4],
-                pic: "",
-                section: 3
-            })
+            body: JSON.stringify(task)
         };
 
         setDataLoaded(false);
@@ -96,6 +84,8 @@ const TasksContextProvider = ({ children }) => {
         setState(groupTasksBySections(data));
 
         setDataLoaded(true);
+
+        await router.push('/');
     }
 
     const removeTask = async (id) => {
@@ -139,6 +129,24 @@ const TasksContextProvider = ({ children }) => {
     /*            Comments             */
     /***********************************/
 
+    const addComment = async (comment) => {
+
+        const url = "http://localhost:3000/comments";
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(comment)
+        };
+
+        setDataLoaded(false);
+
+        await fetch(url, requestOptions).then(d => d.json()).then(d => d.data);
+        const data = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.data);
+        setTasks(data);
+        setState(groupTasksBySections(data));
+
+        setDataLoaded(true);
+    }
 
     /***********************************/
     /*              State              */
@@ -149,7 +157,7 @@ const TasksContextProvider = ({ children }) => {
         const [removed] = result.splice(startIndex, 1);
         result.splice(endIndex, 0, removed);
 
-        return result
+        return result;
     };
 
     const move = (source, destination, droppableSource, droppableDestination) => {
@@ -201,7 +209,6 @@ const TasksContextProvider = ({ children }) => {
         }
         const newSections = [...sections];
         newSections.push(nueva);
-        console.log(newSections);
         setSections(newSections);
         const tasks = newSections.map(section => section.tasks.map(taskId => tasks_.find(task => task.id === taskId)));
         setState(tasks);
@@ -226,7 +233,7 @@ const TasksContextProvider = ({ children }) => {
         users,
         categories,
         attachments,
-        comments,
+        comments, addComment,
         state, onDragEnd,
     }
 

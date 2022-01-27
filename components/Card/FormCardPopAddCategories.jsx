@@ -2,7 +2,6 @@ import React from 'react'
 import styles from "./FormCardPopAddCategories.module.scss"
 import { categories as categories_ } from '../../models/categories'
 
-
 const FormCardPopAddCategories = () => {
     return (
         <div className={styles.pop_add_categories}>

@@ -8,17 +8,16 @@ import MoreHoriRoundedIcon from '@material-ui/icons/MoreHoriz';
 
 const SectionHeader = ({ index }) => {
 
-    const { sections, categories } = useContext(TasksContext);
+    const { tasks, sections, categories } = useContext(TasksContext);
 
     const section = sections[index];
     const category = categories[section.category];
-    const progressClass = styles.progress_bar + " " + styles[category.color];
 
     return (
         <div className={styles.section_header}>
             <div className={styles.section_title}>
                 <h3 className={styles.text}>{section.title}:</h3>
-                <progress className={progressClass} max="100" value="80" />
+                <div className={styles.progress_bar} style={{background: `${category.color}`}}/>
             </div>
             <div className={styles.section_ctas}>
                 <MyButton theme="default" content="icon">

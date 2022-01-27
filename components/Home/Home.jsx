@@ -10,10 +10,9 @@ import SectionFooter from "./SectionFooter"
 
 const Home = () => {
 
-    const { state, onDragEnd, sections, addNewSection } = useContext(TasksContext);
+    const { state, onDragEnd, addNewSection } = useContext(TasksContext);
 
     return (
-
         <div className={styles.home}>
             <SearchBox addNewSection={addNewSection}/>
             <div className={styles.sections}>
@@ -26,7 +25,7 @@ const Home = () => {
                                         <SectionHeader index={index} />
                                         <SectionContent column={column} />
                                         {provided.placeholder}
-                                        <SectionFooter />
+                                        <SectionFooter index={index} />
                                     </section>
                                 )}
                             </Droppable>
