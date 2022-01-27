@@ -192,21 +192,6 @@ const TasksContextProvider = ({ children }) => {
         }
     }
 
-    const addNewSection = () => {
-        const nueva = {
-            id: 4,
-            title: "Hola",
-            category: 2,
-            tasks: []
-        }
-        const newSections = [...sections];
-        newSections.push(nueva);
-        console.log(newSections);
-        setSections(newSections);
-        const tasks = newSections.map(section => section.tasks.map(taskId => tasks_.find(task => task.id === taskId)));
-        setState(tasks);
-    }
-
     const addNewTask = () => {
         setState([...state, getItems(1)]);
     }

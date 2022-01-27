@@ -1,0 +1,41 @@
+@import './../../assets/lib/vars';
+@import './../../assets/lib/mixins';
+.pop_add_categories{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    background-color: #E7EBF7;
+    padding: .75rem;
+    border-radius: .25rem;
+    margin-top: .5rem;
+
+    
+    .add_categories_search{
+        input{
+            border-radius: .25rem;
+
+            padding: .5rem;
+        }
+    }
+    .add_categories{
+        display: flex;
+        flex-direction: column;
+        margin-top: .25rem;
+        .cat{
+            
+            padding: .5rem;
+            border-radius: .25rem;
+            .cat_color{
+                width: 24px;
+                height: 20px;
+                border-radius: .25rem;
+                
+            }
+            
+        }
+    }
+    .cat:hover{
+        background-color: white;
+    }
+}
