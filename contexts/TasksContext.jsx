@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import { sections as sections_} from './../models/sections'
 import { tasks as tasks_ } from './../models/tasks'
 
@@ -9,7 +9,11 @@ const TasksContextProvider = ({ children }) => {
     const [sections, setSections] = useState([sections_[0], sections_[1], sections_[2], sections_[3]]);
     const tasks = sections.map(section => section.tasks.map(taskId => tasks_.find(task => task.id === taskId)));
     const [state, setState] = useState([tasks[0], tasks[1], tasks[2], tasks[3]]);
-    //const [state, setState] = useState([sections_[0], sections_[1], sections_[2], sections_[3]]);
+    
+    useEffect(() => {
+        const tasks = sections.map(section => section.tasks.map(taskId => tasks_.find(task => task.id === taskId)));
+        setState(tasks)
+    }, [sections])
 
     const reorder = (list, startIndex, endIndex) => {
         const result = Array.from(list);
@@ -59,21 +63,6 @@ const TasksContextProvider = ({ children }) => {
         }
     }
 
-    const addNewSection = () => {
-        const nueva = {
-            id: 4,
-            title: "Hola",
-            category: 2,
-            tasks: []
-        }
-        const newSections = [...sections];
-        newSections.push(nueva);
-        console.log(newSections);
-        setSections(newSections);
-        const tasks = newSections.map(section => section.tasks.map(taskId => tasks_.find(task => task.id === taskId)));
-        setState(tasks);
-    }
-
     const addNewTask = () => {
         setState([...state, getItems(1)]);
     }
@@ -88,9 +77,11 @@ const TasksContextProvider = ({ children }) => {
 
     const value = {
         sections,
+        tasks,
         state,
+        setState,
+        setSections,
         onDragEnd, 
-        addNewSection,
         addNewTask,
         deleteTask,
     }

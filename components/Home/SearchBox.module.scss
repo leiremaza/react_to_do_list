@@ -68,3 +68,10 @@
     color: $fore_color_light_grey;
     text-align: center;
 }
+
+.menu{
+    display: none;
+    .opened{
+        display: block;
+    }
+}
