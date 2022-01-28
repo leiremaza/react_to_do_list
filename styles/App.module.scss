@@ -2,21 +2,26 @@
 @import './../assets/lib/mixins';
 
 .app {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    height: 100%;
+    overflow: hidden;
     display: grid;
     grid-template-rows: auto 1fr;
     grid-template-columns: 1fr;
-    grid-template-areas: "header"
-                         "content";
-    
 }
 
 .header {
-    grid-area: header; 
+    grid-area: 1/1/span 1/span 1;
     @include flex-spacebetween-center;
     background-color: $bg_header;
     padding: .5rem 1.625rem;
 }
 
 .content {
-    grid-area: content;
+    grid-area: 2/1/span 1/span 1;
+    height: 100%;
 }

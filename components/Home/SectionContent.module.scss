@@ -4,5 +4,7 @@
 .section_content {
     @include flex-column-start-center; 
     background-color: $bg_section;
-    padding: 0 1rem;   
+    padding: 0 1rem;
+    overflow: auto;
+    flex-basis: 100%; 
 }

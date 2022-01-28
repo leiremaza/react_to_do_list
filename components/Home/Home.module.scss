@@ -4,6 +4,7 @@
 .home {
     @include flex-column-start-center;
     background: $bg_main;
+    height: 100%;
 }
 
 .sections {
@@ -13,6 +14,7 @@
     align-items: flex-start;
     margin: .3125rem;
     width: calc(100% - .3125rem - .3125rem);
+    height: 100%;
 }
 
 .section {
@@ -22,21 +24,7 @@
     
     &:last-child {
         margin-right: 0;
-    }   
-}
+    }
 
-.section_content {
-    @include flex-column-start-center; 
-    background-color: $bg_section;
-    padding: 0 1rem;   
-}
-
-.section {
-    background: $bg_article;
-    margin-right: .3125rem;
-    width: 25%;
-    
-    &:last-child {
-        margin-right: 0;
-    }   
+    height: 100%;
 }

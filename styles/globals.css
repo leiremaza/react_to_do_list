@@ -8,7 +8,8 @@ body {
     font-family: 'Roboto', 'Source Sans Pro', 'Helvetica', Arial, sans_serif;
     line-height: 24px;
     color: #333;
-    min-height: 100vh;
+    /*min-height: 100vh;
+    max-height: 100vh;*/
     margin: 0;
 }
 

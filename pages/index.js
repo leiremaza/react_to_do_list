@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import styles from '../styles/Home.module.scss'
+import styles from '../styles/App.module.scss'
 
 import { TasksContext } from '../contexts/TasksContext'
 import HeaderLeft from "../components/Header/HeaderLeft"
@@ -10,16 +10,16 @@ const index = () => {
 
   const { dataLoaded } = useContext(TasksContext);
   const [winReady, setwinReady] = useState(false);
-  
+
   useEffect(() => {
     setwinReady(true);
   }, []);
 
   return (
-    <div>
+    <div className={styles.app}>
       {
         winReady & dataLoaded ?
-          <div className={styles.app}>
+          <div className={styles.container}>
             <header className={styles.header}>
               <HeaderLeft />
               <HeaderRight />
