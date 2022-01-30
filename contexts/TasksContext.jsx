@@ -77,7 +77,7 @@ const TasksContextProvider = ({ children }) => {
         };
 
         setDataLoaded(false);
-
+        
         await fetch(url, requestOptions).then(d => d.json()).then(d => d.data);
         const data = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.data);
         setTasks(data);
@@ -86,6 +86,27 @@ const TasksContextProvider = ({ children }) => {
         setDataLoaded(true);
 
         await router.push('/');
+    }
+
+    const editTaskComments = async (id, comments) => {
+
+        const url = "http://localhost:3000/tasks/" + id + "/comments";
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(comments)
+        };
+
+        setDataLoaded(false);
+        
+        await fetch(url, requestOptions).then(d => d.json()).then(d => d.data);
+        const data = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.data);
+        setTasks(data);
+        setState(groupTasksBySections(data));
+
+        setDataLoaded(true);
+
+        await router.push('/card/' + id);
     }
 
     const removeTask = async (id) => {
@@ -141,9 +162,8 @@ const TasksContextProvider = ({ children }) => {
         setDataLoaded(false);
 
         await fetch(url, requestOptions).then(d => d.json()).then(d => d.data);
-        const data = await fetch("http://localhost:3000/tasks").then(d => d.json()).then(d => d.data);
-        setTasks(data);
-        setState(groupTasksBySections(data));
+        const data = await fetch("http://localhost:3000/comments").then(d => d.json()).then(d => d.data);
+        setComments(data);
 
         setDataLoaded(true);
     }
@@ -200,21 +220,9 @@ const TasksContextProvider = ({ children }) => {
         }
     }
 
-    const addNewTask = () => {
-        setState([...state, getItems(1)]);
-    }
-
-    const deleteTask = (index) => {
-        const newState = [...state];
-        newState[index].splice(index, 1);
-        setState(
-            newState.filter(group => group.length)
-        );
-    }
-
     const value = {
         dataLoaded,
-        tasks, addTask, editTask, removeTask,
+        tasks, addTask, editTask, editTaskComments, removeTask,
         sections,
         users,
         categories,

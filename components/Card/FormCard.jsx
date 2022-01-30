@@ -17,7 +17,7 @@ import { TasksContext } from '../../contexts/TasksContext'
 
 const FormCard = ({ id }) => {
 
-    const { tasks, categories, users, attachments, comments, addTask, editTask, removeTask } = useContext(TasksContext);
+    const { tasks, editTask, categories, users, attachments, comments, addComment, editTaskComments } = useContext(TasksContext);
 
     const task = tasks.find(t => t.id == id);
 
@@ -89,9 +89,17 @@ const FormCard = ({ id }) => {
 
     /*---AÑADIR COMENTARIO---*/
     const [addComments, setAddComments] = useState(taskComments)
-    const addComment = () => {
+    const addComment2 = () => {
 
         if (labelComment.current.value !== "") {
+            addComment({
+                text: labelComment.current.value,
+                user: 3
+            });
+            editTaskComments(task.id, [0,1,2,3,4])
+        }
+
+        /*if (labelComment.current.value !== "") {
             const newComments = [...addComments];
             newComments.push({
                 id: (comments.length),
@@ -101,27 +109,24 @@ const FormCard = ({ id }) => {
             );
             setAddComments(newComments);
             labelComment.current.value = ""
-            console.log(newComments)
-        }
-
-
+        }*/
     }
     /*--EDITAR TASKS--*/
     const editTask2 = () => {
-        console.log(task)
-        const newTask =
-        {
+
+        const newTask = {
             id: task.id,
             title: (labelTitle.current.value == "" ? task.title : labelTitle.current.value),
             description: labelDescription.current.value,
-            users: addUsers,
-            categories: addCategories,
-            attached: attached,
-            comments: addComments,
-            pic: ""
+            users: addUsers.map(i => i.id),
+            categories: addCategories.map(i => i.id),
+            attachments: attachments.map(i => i.id),
+            comments: addComments.map(i => i.id),
+            pic: task.pic,
+            section: task.section
         }
-        console.log(newTask)
 
+        editTask(newTask, addComments);
     }
 
     return (
@@ -213,7 +218,7 @@ const FormCard = ({ id }) => {
                                 addComments.map((comment, i_) => (
                                     <div className={styles.comment} key={i_}>
                                         <div className={styles.user}>
-                                            <img src={"../" + users[comment.user].pic} alt={users[comment.user].name} />
+                                            {/* <img src={"../" + users[comment.user].pic} alt={users[comment.user].name} /> */}
                                         </div>
                                         <h5 className={styles.text}>{comment.text}</h5>
                                     </div>
@@ -221,12 +226,12 @@ const FormCard = ({ id }) => {
                             }
                             <div className={styles.form}>
                                 <div className={styles.user}>
-                                    <img src={"../" + users[3].pic} alt={users[3].name} />
+                                    {/* <img src={"../" + users[3].pic} alt={users[3].name} /> */}
                                 </div>
                                 <div className={styles.msg_input}>
                                     <input className={styles.input_control} type="text" placeholder="Add new comment..." ref={labelComment} />
                                 </div>
-                                <MyButton content="text" theme="primary" onClick={addComment}>
+                                <MyButton content="text" theme="primary" onClick={addComment2}>
                                     <h5 className={styles.add}>Send</h5>
                                 </MyButton>
                             </div>
@@ -235,7 +240,7 @@ const FormCard = ({ id }) => {
                 </div>
                 <div className={styles.card_footer}>
                     <Link href="/" passHref>
-                        <MyButton type="button" content="text" theme="primary" onClick={editTask}>
+                        <MyButton type="button" content="text" theme="primary" onClick={editTask2}>
                             <h5 className={styles.add}>Save</h5>
                         </MyButton>
                     </Link>
